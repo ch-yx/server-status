@@ -61,8 +61,17 @@ def get (IP,port=25565):
             _in+=d
             if not d[0]>>7:
                 break
-        d=s.recv(sum((j&0b1111111)<<(7*i) for i,j in enumerate(_in)))
+        changdu1=sum((j&0b1111111)<<(7*i) for i,j in enumerate(_in))
+        d=b""
+        while changdu1:
+            
+            dd=s.recv(changdu1)
+            #print(changdu1,len(d))
+            changdu1-=len(dd)
+            d+=dd
+            
         del _in
+        del dd
         
 
         #print(d)
